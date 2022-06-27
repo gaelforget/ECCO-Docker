@@ -2,7 +2,7 @@ name: repo2docker
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   binder:
     runs-on: ubuntu-latest
