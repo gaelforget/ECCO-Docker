@@ -1,4 +1,4 @@
-name: Pluto, sysimage, & build for mybinder.org
+name: repo2docker
 on:
   push:
     branches:
