@@ -9,8 +9,7 @@ This [Docker image configuration](https://www.docker.com) makes it easy to analy
 - Julia, R, and Python kernels (for Jupyter notebooks)
 - Support for Pluto notebook (+ Jupyter + terminal)
 
-!!! warning
-    Work in progress...
+_Work in progress..._
 
 To build and run locally, you will need [Docker Desktop](https://docs.docker.com/desktop/) installed. Then, at the command line, try :
 
