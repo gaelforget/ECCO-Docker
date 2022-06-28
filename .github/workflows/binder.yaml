@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - maap_gf1
 jobs:
   binder:
     runs-on: ubuntu-latest

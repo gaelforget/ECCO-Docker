@@ -1,34 +1,30 @@
-FROM jupyter/base-notebook:latest
+FROM mas.ops.maap-project.org/root/jupyter-image/vanilla:develop
 
 USER root
+
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.2-linux-x86_64.tar.gz && \
     tar -xvzf julia-1.7.2-linux-x86_64.tar.gz && \
     mv julia-1.7.2 /opt/ && \
     ln -s /opt/julia-1.7.2/bin/julia /usr/local/bin/julia && \
     rm julia-1.7.2-linux-x86_64.tar.gz
 
-ENV mainpath ./
+ENV mainpath /usr/local/etc/gf
 RUN mkdir -p ${mainpath}
 
-USER ${NB_USER}
-
-COPY --chown=${NB_USER}:users ./src ${mainpath}/src
-COPY --chown=${NB_USER}:users ./src/plutoserver ${mainpath}/plutoserver
+COPY ./src ${mainpath}/src
+COPY ./src/plutoserver ${mainpath}/plutoserver
 
 RUN cp ${mainpath}/src/setup.py ${mainpath}/setup.py
 RUN cp ${mainpath}/src/runpluto.sh ${mainpath}/runpluto.sh
 RUN cp ${mainpath}/src/Project.toml ${mainpath}/Project.toml
  
-ENV USER_HOME_DIR /home/${NB_USER}
-ENV JULIA_PROJECT ${USER_HOME_DIR}
-ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
+ENV JULIA_PROJECT ${mainpath}
+ENV JULIA_DEPOT_PATH ${mainpath}/.julia
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
 RUN conda install numpy xarray dask pandas rise octave_kernel texinfo r-irkernel
 RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
-
-USER root
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential && \
@@ -49,8 +45,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends liboctave-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-USER ${NB_USER}
-
 RUN jupyter labextension install @jupyterlab/server-proxy && \
     jupyter lab build && \
     jupyter lab clean && \
@@ -61,5 +55,5 @@ RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN julia ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-RUN source ./src/build_MITgcm_ECCO.sh
+RUN source ${mainpath}/src/build_MITgcm_ECCO.sh
 
