@@ -25,7 +25,7 @@ ENV JULIA_DEPOT_PATH ${mainpath}/.julia
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
 # RUN conda install -q numpy xarray dask pandas rise octave_kernel texinfo r-irkernel
-RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
+# RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential && \
@@ -39,11 +39,11 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends mpich && \
     apt-get install -y --no-install-recommends libnetcdf-dev && \
     apt-get install -y --no-install-recommends libnetcdff-dev && \
-    apt-get install -y --no-install-recommends octave && \
-    apt-get install -y --no-install-recommends octave-doc && \
-    apt-get install -y --no-install-recommends octave-info && \
-    apt-get install -y --no-install-recommends octave-htmldoc && \
-    apt-get install -y --no-install-recommends liboctave-dev && \
+#   apt-get install -y --no-install-recommends octave && \
+#   apt-get install -y --no-install-recommends octave-doc && \
+#   apt-get install -y --no-install-recommends octave-info && \
+#   apt-get install -y --no-install-recommends octave-htmldoc && \
+#   apt-get install -y --no-install-recommends liboctave-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN jupyter labextension install @jupyterlab/server-proxy && \
@@ -52,10 +52,10 @@ RUN jupyter labextension install @jupyterlab/server-proxy && \
     pip install ${mainpath} --no-cache-dir && \
     rm -rf ~/.cache
 
-RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
-RUN julia ${mainpath}/src/download_stuff.jl
+# RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
+# RUN julia ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-RUN source build_MITgcm_ECCO.sh
+RUN . build_MITgcm_ECCO.sh
 RUN cd ${mainpath}
 

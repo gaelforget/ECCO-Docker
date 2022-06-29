@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 git clone --depth 1 --branch checkpoint67z https://github.com/MITgcm/MITgcm
 git clone https://github.com/gaelforget/ECCOv4
