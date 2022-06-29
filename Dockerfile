@@ -46,11 +46,11 @@ RUN apt-get update && \
 #   apt-get install -y --no-install-recommends liboctave-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN jupyter labextension install @jupyterlab/server-proxy && \
-    jupyter lab build && \
-    jupyter lab clean && \
-    pip install ${mainpath} --no-cache-dir && \
-    rm -rf ~/.cache
+# RUN jupyter labextension install @jupyterlab/server-proxy && \
+#     jupyter lab build && \
+#     jupyter lab clean && \
+#     pip install ${mainpath} --no-cache-dir && \
+#     rm -rf ~/.cache
 
 # RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 # RUN julia ${mainpath}/src/download_stuff.jl
