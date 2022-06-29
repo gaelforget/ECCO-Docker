@@ -56,6 +56,7 @@ RUN jupyter labextension install @jupyterlab/server-proxy && \
 # RUN julia ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
+RUN pwd
 RUN . build_MITgcm_ECCO.sh
 RUN cd ${mainpath}
 
