@@ -60,8 +60,9 @@ RUN git clone --depth 1 --branch checkpoint67z https://github.com/MITgcm/MITgcm
 RUN git clone https://github.com/gaelforget/ECCOv4
 RUN mkdir MITgcm/mysetups
 RUN mv ECCOv4 MITgcm/mysetups/.
+RUN cp MITgcm/tools/genmake2 MITgcm/mysetups/ECCOv4/build/.
 RUN cd MITgcm/mysetups/ECCOv4/build
-RUN ../../../tools/genmake2 -mods=../code -mpi > tmp.genmake.txt
+RUN ./genmake2 -mods=../code -mpi > tmp.genmake.txt
 RUN make depend > tmp.makedepend.txt
 RUN make -j 4 > tmp.make.txt
 
