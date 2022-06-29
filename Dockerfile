@@ -17,6 +17,7 @@ COPY ./src/plutoserver ${mainpath}/plutoserver
 RUN cp ${mainpath}/src/setup.py ${mainpath}/setup.py
 RUN cp ${mainpath}/src/runpluto.sh ${mainpath}/runpluto.sh
 RUN cp ${mainpath}/src/Project.toml ${mainpath}/Project.toml
+RUN cp ${mainpath}/src/build_MITgcm_ECCO.sh ${mainpath}/build_MITgcm_ECCO.sh
  
 ENV JULIA_PROJECT ${mainpath}
 ENV JULIA_DEPOT_PATH ${mainpath}/.julia
@@ -55,5 +56,6 @@ RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN julia ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-# RUN source ${mainpath}/src/build_MITgcm_ECCO.sh
+RUN source build_MITgcm_ECCO.sh
+RUN cd ${mainpath}
 
