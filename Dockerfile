@@ -56,7 +56,14 @@ RUN jupyter labextension install @jupyterlab/server-proxy && \
 # RUN julia ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-RUN pwd
-RUN . build_MITgcm_ECCO.sh
+RUN git clone --depth 1 --branch checkpoint67z https://github.com/MITgcm/MITgcm
+RUN git clone https://github.com/gaelforget/ECCOv4
+RUN mkdir MITgcm/mysetups
+RUN mv ECCOv4 MITgcm/mysetups/.
+RUN cd MITgcm/mysetups/ECCOv4/build
+RUN ../../../tools/genmake2 -mods=../code -mpi > tmp.genmake.txt
+RUN make depend > tmp.makedepend.txt
+RUN make -j 4 > tmp.make.txt
+
 RUN cd ${mainpath}
 
