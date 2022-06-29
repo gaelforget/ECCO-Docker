@@ -23,7 +23,7 @@ ENV JULIA_DEPOT_PATH ${mainpath}/.julia
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install -q numpy xarray dask pandas rise octave_kernel texinfo r-irkernel
+# RUN conda install -q numpy xarray dask pandas rise octave_kernel texinfo r-irkernel
 RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
 
 RUN apt-get update && \
