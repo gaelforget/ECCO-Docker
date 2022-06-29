@@ -16,7 +16,7 @@ COPY ./src/plutoserver ${mainpath}/plutoserver
 
 RUN cp ${mainpath}/src/setup.py ${mainpath}/setup.py
 RUN cp ${mainpath}/src/runpluto.sh ${mainpath}/runpluto.sh
-RUN cp ${mainpath}/src/Project.toml ${mainpath}/Project.toml
+# RUN cp ${mainpath}/src/Project.toml ${mainpath}/Project.toml
 RUN cp ${mainpath}/src/build_MITgcm_ECCO.sh ${mainpath}/build_MITgcm_ECCO.sh
  
 ENV JULIA_PROJECT ${mainpath}
