@@ -55,5 +55,5 @@ RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN julia ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-RUN source ${mainpath}/src/build_MITgcm_ECCO.sh
+# RUN source ${mainpath}/src/build_MITgcm_ECCO.sh
 
