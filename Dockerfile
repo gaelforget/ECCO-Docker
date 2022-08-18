@@ -45,6 +45,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends libnetcdff-dev && \
     apt-get install -y --no-install-recommends octave octave-doc && \
     apt-get install -y --no-install-recommends octave-io && \
+    apt-get install -y --no-install-recommends octave-cli && \
     apt-get install -y --no-install-recommends octave-optim && \
     apt-get install -y --no-install-recommends octave-statistics && \
     apt-get install -y --no-install-recommends liboctave-dev && \
