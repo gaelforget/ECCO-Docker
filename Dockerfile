@@ -25,7 +25,7 @@ ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install numpy xarray dask pandas rise octave_kernel texinfo r-irkernel
+RUN conda install numpy xarray dask pandas octave_kernel texinfo r-irkernel
 RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
 
 USER root
@@ -44,8 +44,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends libnetcdff-dev && \
     apt-get install -y --no-install-recommends octave && \
     apt-get install -y --no-install-recommends octave-doc && \
-    apt-get install -y --no-install-recommends octave-info && \
-    apt-get install -y --no-install-recommends octave-htmldoc && \
     apt-get install -y --no-install-recommends liboctave-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
