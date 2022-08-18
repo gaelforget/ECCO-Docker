@@ -36,6 +36,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends git && \
     apt-get install -y --no-install-recommends unzip && \
     apt-get install -y --no-install-recommends gfortran && \
+    apt-get install -y --no-install-recommends gnuplot && \
     apt-get install -y --no-install-recommends openmpi-bin && \
     apt-get install -y --no-install-recommends openmpi-doc && \
     apt-get install -y --no-install-recommends libopenmpi-dev && \
