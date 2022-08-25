@@ -36,14 +36,17 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends git && \
     apt-get install -y --no-install-recommends unzip && \
     apt-get install -y --no-install-recommends gfortran && \
+    apt-get install -y --no-install-recommends gnuplot && \
     apt-get install -y --no-install-recommends openmpi-bin && \
     apt-get install -y --no-install-recommends openmpi-doc && \
     apt-get install -y --no-install-recommends libopenmpi-dev && \
     apt-get install -y --no-install-recommends mpich && \
     apt-get install -y --no-install-recommends libnetcdf-dev && \
     apt-get install -y --no-install-recommends libnetcdff-dev && \
-    apt-get install -y --no-install-recommends octave && \
-    apt-get install -y --no-install-recommends octave-doc && \
+    apt-get install -y --no-install-recommends octave octave-doc && \
+    apt-get install -y --no-install-recommends octave-io && \
+    apt-get install -y --no-install-recommends octave-optim && \
+    apt-get install -y --no-install-recommends octave-statistics && \
     apt-get install -y --no-install-recommends liboctave-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
