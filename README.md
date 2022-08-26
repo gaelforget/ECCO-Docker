@@ -8,7 +8,7 @@ It includes :
 
 - [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (67z) compiled for [ECCOv4](https://eccov4.readthedocs.io/en/latest/) (r2)
 - gfortran, MPI, and NetCDF libraries for MITgcm
-- Julia, R, and Python kernels for Jupyter
+- Julia, R, Python, and Octave kernels for Jupyter
 - Pluto notebook support (+ Jupyter + terminal)
 
 ## Directions
