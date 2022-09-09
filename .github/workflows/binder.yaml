@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - v0p1p2b
+      - gcp-dev01
 jobs:
   binder:
     runs-on: ubuntu-latest

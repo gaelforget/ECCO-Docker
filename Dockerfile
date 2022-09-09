@@ -1,7 +1,7 @@
 FROM jupyter/base-notebook:latest
 
 USER root
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.2-linux-x86_64.tar.gz && \
+RUN wget https://zenodo.org/record/7065772/files/julia-1.7.2-linux-x86_64.tar.gz?download=1 && \
     tar -xvzf julia-1.7.2-linux-x86_64.tar.gz && \
     mv julia-1.7.2 /opt/ && \
     ln -s /opt/julia-1.7.2/bin/julia /usr/local/bin/julia && \
