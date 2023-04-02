@@ -1,44 +1,47 @@
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gaelforget/ECCO-Docker/HEAD)
-[![DOI](https://zenodo.org/badge/507698620.svg)](https://zenodo.org/badge/latestdoi/507698620)
-
-This [Docker image configuration](https://www.docker.com) makes it easy to analyze and run [ECCO](https://ecco-group.org) estimates and other [MITgcm](http://mitgcm.org) model solutions. 
+This [Docker image configuration](https://www.docker.com) makes it easy to reproduce the [ECCO v4r4](https://ecco-group.org) state estimate.
 
 It includes :
 
-- [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (67z) compiled for [ECCOv4](https://eccov4.readthedocs.io/en/latest/) (r2)
+- [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (67z) compiled for [ECCO v4r4]
 - gfortran, MPI, and NetCDF libraries for MITgcm
-- Julia, R, Python, and Octave kernels for Jupyter
-- Pluto notebook support (+ Jupyter + terminal)
 
 ## Directions
-
-1. To use in the cloud
-
-Click the binder link above.
 
 2. To use on your local computer
 
 You will need [Docker Desktop](https://docs.docker.com/desktop/) installed. 
 
-Then, at the command line, try (2a)
+To build your own image, go into the directory ECCO-Docker/ECCO_v4r4 and run
 
 ```
-docker run -p 8888:8888 gaelforget/ecco-docker
+docker build -t ecco_v4r4_docker_image .
 ```
 
-Or if you want to build your own image then try (2b)
+To run the image do
 
 ```
-git clone https://github.com/gaelforget/ECCO-Docker
-docker build -t ecco-docker-1 ECCO-Docker
-docker run -p 8888:8888 ecco-docker-1
+docker run -t -i --rm ecco-v4r4-docker_image bash
 ```
 
-## Preview 
+After running you will be in an interactive bash shell.  To compile the code you'll need to choose or modify a SIZE.h file located in
+```
+/home/ecco/ECCOV4/release4/code
+``` 
 
-In all cases (method 1, 2a, or 2b), the result should look like this in your web browser window :
+Then from the ```/home/ecco/ECCOV4/release4/build``` directory: 
 
-![Screen Shot 2022-06-26 at 10 43 40 PM](https://user-images.githubusercontent.com/20276764/175850300-04fd85a4-45ac-4d88-8b32-91f585baa8cb.png)
+```
+>$ROOTDIR/tools/genmake2 -mods=../code -of=~/docker_src/linux_amd64_gfortran -mpi
+>make -j depend
+>make -j
+``` 
 
-_Note: this repository derives from the [JuliaClimate/Notebooks](https://github.com/JuliaClimate/Notebooks) Docker configuration._
+To run the model you will need to link all the binary files as described here:
+
+Instructions for reproducing ECCO Version 4 Release 4
+[https://doi.org/10.5281/zenodo.7789915](https://doi.org/10.5281/zenodo.7789915)
+
+
+
+
