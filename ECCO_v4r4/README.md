@@ -3,12 +3,17 @@ This [Docker image configuration](https://www.docker.com) makes it easy to repro
 
 It includes :
 
-- [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (67z) compiled for [ECCO v4r4]
-- gfortran, MPI, and NetCDF libraries for MITgcm
+- gfortran, MPI, and NetCDF libraries needed to compile and run the MITgcm
+- bash script to download the 
+  1. [MITgcm](https://github.com/MITgcm/MITgcm) [checkpoint 66g](https://github.com/MITgcm/MITgcm/releases/tag/checkpoint66g)
+  2. [ECCOv4-py Configuration files](https://github.com/ECCO-GROUP/ECCO-v4-Configurations)
+
+Future versions will include Jupyter hub and the [ECCOv4-py Python Library](https://github.com/ECCO-GROUP/ECCOv4-py).
+
 
 ## Directions
 
-2. To use on your local computer
+To use on your local computer
 
 You will need [Docker Desktop](https://docs.docker.com/desktop/) installed. 
 
@@ -24,12 +29,11 @@ To run the image do
 docker run -t -i --rm ecco-v4r4-docker_image bash
 ```
 
-After running you will be in an interactive bash shell.  To compile the code you'll need to choose or modify a SIZE.h file located in
-```
-/home/ecco/ECCOV4/release4/code
-``` 
+After running you will be in an interactive bash shell.  
 
-Then from the ```/home/ecco/ECCOV4/release4/build``` directory: 
+To compile the MITgcm code first need to define SIZE.h a model configuration file in the ```ECCOV4/release4/code``` directory that specifies the number of cpus on your machine. We included a few SIZE.h_NN files for different number of cpus (NN). 
+
+After you have a SIZE.h file then go to the ```/home/ecco/ECCOV4/release4/build``` directory and build the model code: 
 
 ```
 >$ROOTDIR/tools/genmake2 -mods=../code -of=~/docker_src/linux_amd64_gfortran -mpi
@@ -37,11 +41,7 @@ Then from the ```/home/ecco/ECCOV4/release4/build``` directory:
 >make -j
 ``` 
 
-To run the model you will need to link all the binary files as described here:
+The result will be an executable ```mitgcmuv```. 
 
-Instructions for reproducing ECCO Version 4 Release 4
-[https://doi.org/10.5281/zenodo.7789915](https://doi.org/10.5281/zenodo.7789915)
-
-
-
-
+To run the model you will need to link all the binary files as described in the
+Instructions for reproducing ECCO Version 4 Release 4 [[https://doi.org/10.5281/zenodo.7789915](https://doi.org/10.5281/zenodo.7789915) document.
