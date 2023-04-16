@@ -26,7 +26,6 @@ ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
 RUN conda install numpy xarray dask pandas octave_kernel texinfo r-irkernel
-RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
 
 USER root
 
@@ -52,6 +51,11 @@ RUN apt-get update && \
 
 USER ${NB_USER}
 
+ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
+RUN source ./src/build_MITgcm_ECCO.sh
+
+RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
+
 RUN jupyter labextension install @jupyterlab/server-proxy && \
     jupyter lab build && \
     jupyter lab clean && \
@@ -61,6 +65,4 @@ RUN jupyter labextension install @jupyterlab/server-proxy && \
 RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN julia ${mainpath}/src/download_stuff.jl
 
-ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-RUN source ./src/build_MITgcm_ECCO.sh
 
