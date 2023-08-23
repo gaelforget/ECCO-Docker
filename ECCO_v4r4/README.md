@@ -26,7 +26,7 @@ docker build -t ecco_v4r4_docker_image .
 To run the image do
 
 ```
-docker run -t -i --rm ecco-v4r4-docker_image bash
+docker run -t -i --rm ecco_v4r4_docker_image bash
 ```
 
 After running you will be in an interactive bash shell.  
