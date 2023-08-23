@@ -23,6 +23,12 @@ To build your own image, go into the directory ECCO-Docker/ECCO_v4r4 and run
 docker build -t ecco_v4r4_docker_image .
 ```
 
+If your computer is a Mac that uses ARM-based chips (such as M1), use the following command to build the image:
+  
+```
+docker build -t ecco_v4r4_docker_image . --build-arg="CHIP_ARCT=aarch64"
+```
+
 To run the image do
 
 ```
