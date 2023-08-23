@@ -3,6 +3,8 @@ FROM debian:latest
 RUN ["/bin/bash", "-c", "echo I am using bash"]
 SHELL ["/bin/bash", "-c"]
 
+ARG CHIP_ARCT=x86_64
+
 USER root
 
 ENV mainpath ./
@@ -45,7 +47,7 @@ WORKDIR /home/ecco
 COPY --chown=ecco:users ./src ${USER_HOME_DIR}/docker_src
 
 # set environment variables for compiling MITgcm
-ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
+ENV MPI_INC_DIR /usr/lib/${CHIP_ARCT}-linux-gnu/openmpi/include
 ENV ROOTDIR /home/ecco/MITgcm
 
 # download the mitgcm and ecco configuration files
