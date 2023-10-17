@@ -13,6 +13,8 @@ It includes :
 
 ## Directions
 
+🎦 [video tutorial](https://www.youtube.com/live/daNrJhPPgWg?si=C2SXKgeh3AMzwW2a) 🎦
+
 1. To use in the cloud
 
 Click the binder link above.
