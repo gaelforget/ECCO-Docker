@@ -1,11 +1,11 @@
 FROM jupyter/base-notebook:latest
 
 USER root
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.3-linux-x86_64.tar.gz && \
-    tar -xvzf julia-1.8.3-linux-x86_64.tar.gz && \
-    mv julia-1.8.3 /opt/ && \
-    ln -s /opt/julia-1.8.3/bin/julia /usr/local/bin/julia && \
-    rm julia-1.8.3-linux-x86_64.tar.gz
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.10/julia-1.10.2-linux-x86_64.tar.gz && \
+    tar -xvzf julia-1.10.2-linux-x86_64.tar.gz && \
+    mv julia-1.10.2 /opt/ && \
+    ln -s /opt/julia-1.10.2/bin/julia /usr/local/bin/julia && \
+    rm julia-1.10.2-linux-x86_64.tar.gz
 
 ENV mainpath ./
 RUN mkdir -p ${mainpath}
@@ -25,8 +25,9 @@ ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install numpy xarray dask pandas octave_kernel texinfo r-irkernel
-RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
+RUN conda install numpy xarray
+RUN conda install dask pandas
+RUN conda install octave_kernel texinfo r-irkernel
 
 USER root
 
@@ -52,8 +53,12 @@ RUN apt-get update && \
 
 USER ${NB_USER}
 
-RUN jupyter labextension install @jupyterlab/server-proxy && \
-    jupyter lab build && \
+ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
+RUN source ./src/build_MITgcm_ECCO.sh
+
+RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
+
+RUN jupyter lab build && \
     jupyter lab clean && \
     pip install ${mainpath} --no-cache-dir && \
     rm -rf ~/.cache
@@ -61,6 +66,4 @@ RUN jupyter labextension install @jupyterlab/server-proxy && \
 RUN julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN julia ${mainpath}/src/download_stuff.jl
 
-ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-RUN source ./src/build_MITgcm_ECCO.sh
 
