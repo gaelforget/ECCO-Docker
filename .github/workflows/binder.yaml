@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - dec2022-gf1
+      - 20240318_updates
 jobs:
   binder:
     runs-on: ubuntu-latest
