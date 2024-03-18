@@ -25,7 +25,9 @@ ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install numpy xarray dask pandas octave_kernel texinfo r-irkernel
+RUN conda install numpy xarray
+RUN conda install dask pandas
+RUN conda install octave_kernel texinfo r-irkernel
 
 USER root
 
@@ -56,8 +58,7 @@ RUN source ./src/build_MITgcm_ECCO.sh
 
 RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
 
-RUN jupyter labextension install @jupyterlab/server-proxy && \
-    jupyter lab build && \
+RUN jupyter lab build && \
     jupyter lab clean && \
     pip install ${mainpath} --no-cache-dir && \
     rm -rf ~/.cache
