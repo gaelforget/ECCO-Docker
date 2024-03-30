@@ -1,12 +1,14 @@
-using ClimateModels, MITgcmTools, OceanStateEstimation
-using Pluto, PlutoUI, PlutoSliderServer, Downloads
-import Plots
+using ClimateModels, MITgcm, OceanStateEstimation
+using Pluto, PlutoUI, PlutoSliderServer, Downloads, IJulia
+#import Plots
 import CairoMakie
 
-#MC=MITgcm_config(configuration="global_with_exf")
-#setup(MC)
-# build(MC,"--allow-skip")
-# launch(MC)
+MITgcm_download()
+
+MC=MITgcm_config(configuration="advect_cs")
+setup(MC)
+build(MC,"--allow-skip")
+launch(MC)
 
 tmp=ModelConfig(model=ClimateModels.RandomWalker)
 setup(tmp)
