@@ -1,4 +1,4 @@
-![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gaelforget/ECCO-Docker/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gaelforget/ECCO-Docker/HEAD)
 [![DOI](https://zenodo.org/badge/507698620.svg)](https://zenodo.org/badge/latestdoi/507698620)
 
 This [Docker image configuration](https://www.docker.com) makes it easy to analyze and run [ECCO](https://ecco-group.org) estimates and other [MITgcm](http://mitgcm.org) model solutions. 
