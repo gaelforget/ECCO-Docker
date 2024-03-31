@@ -56,6 +56,8 @@ RUN ${USER_HOME_DIR}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/do
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
 
+RUN source ${mainpath}/src/build_MITgcm_ECCO.sh
+
 RUN jupyter lab build && \
     jupyter lab clean && \
     pip install ${mainpath} --no-cache-dir && \

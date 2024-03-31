@@ -1,15 +1,14 @@
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gaelforget/ECCO-Docker/HEAD)
+![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gaelforget/ECCO-Docker/HEAD)
 [![DOI](https://zenodo.org/badge/507698620.svg)](https://zenodo.org/badge/latestdoi/507698620)
 
 This [Docker image configuration](https://www.docker.com) makes it easy to analyze and run [ECCO](https://ecco-group.org) estimates and other [MITgcm](http://mitgcm.org) model solutions. 
 
 It includes :
 
-- [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (67z) compiled for [ECCOv4](https://eccov4.readthedocs.io/en/latest/) (r2)
+- [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (version 68o) compiled for [ECCO4](https://eccov4.readthedocs.io/en/latest/)
 - gfortran, MPI, and NetCDF libraries for MITgcm
 - Julia, R, Python, and Octave kernels for Jupyter
-- Pluto notebook support (+ Jupyter + terminal)
+- Notebook support (Jupyter and Pluto)
 
 ## Directions
 
@@ -41,6 +40,6 @@ docker run -p 8888:8888 ecco-docker-1
 
 In all cases (method 1, 2a, or 2b), the result should look like this in your web browser window :
 
-![Screen Shot 2022-06-26 at 10 43 40 PM](https://user-images.githubusercontent.com/20276764/175850300-04fd85a4-45ac-4d88-8b32-91f585baa8cb.png)
+![Screen Shot 2022-06-26 at 10 43 40 PM](https://private-user-images.githubusercontent.com/20276764/318265855-b51bb390-c127-4a1a-93e9-6fcf75331e60.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTE4ODc1NzcsIm5iZiI6MTcxMTg4NzI3NywicGF0aCI6Ii8yMDI3Njc2NC8zMTgyNjU4NTUtYjUxYmIzOTAtYzEyNy00YTFhLTkzZTktNmZjZjc1MzMxZTYwLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAzMzElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMzMxVDEyMTQzN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWUwNmFmOWE4Y2YwZmYwZjk0MDY4ZWE2MTFkYjU4Y2M0YTQ5MmEyZTExNThmYTQwMmI3YWQwMmEzNGVlOGVhNzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.1NZm6frwr81hBrbUGGbNXHYQEyojCNTg2Zul9b3YvZc)
 
 _Note: this repository derives from the [JuliaClimate/Notebooks](https://github.com/JuliaClimate/Notebooks) Docker configuration._
