@@ -6,9 +6,9 @@ This [Docker image configuration](https://www.docker.com) makes it easy to analy
 It includes :
 
 - [MITgcm](https://mitgcm.readthedocs.io/en/latest/?badge=latest) (version 68o) compiled for [ECCO4](https://eccov4.readthedocs.io/en/latest/)
-- gfortran, MPI, and NetCDF libraries for MITgcm
-- Julia, R, Python, and Octave kernels for Jupyter
-- Notebook support (Jupyter and Pluto)
+- `gfortran`, `MPI`, and `NetCDF` libraries for MITgcm
+- `Julia`, `R`, `Python`, and `Octave` kernels for Jupyter
+- Notebook support (`Jupyter` and `Pluto`)
 
 ## Directions
 
