@@ -10,7 +10,7 @@ setup(MC)
 build(MC)
 
 mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"mitgcmuv")
-rm(MC,recursive=true)
+rm(pathof(MC),recursive=true)
 
 tmp=ModelConfig(model=ClimateModels.RandomWalker)
 setup(tmp)
