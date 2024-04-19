@@ -1,25 +1,26 @@
-using Pluto, PlutoUI, PlutoSliderServer, Downloads, IJulia
-#import Plots
-import CairoMakie
+using Pluto, Downloads, IJulia, Pkg
 
-using ClimateModels, MITgcm, OceanStateEstimation, MeshArrays
+import MITgcm, OceanStateEstimation
+import MITgcm.ClimateModels
+import MITgcm.MeshArrays
+using MITgcm.ClimateModels.Git
 
 ##
 
 p0=pathof(MITgcm)
 fil=joinpath(dirname(p0),"..","examples","configurations","OCCA2.toml")
-MC=MITgcm_config(inputs=read_toml(fil))
-setup(MC)
-build(MC)
+MC=MITgcm.MITgcm_config(inputs=MITgcm.read_toml(fil))
+ClimateModels.setup(MC)
+ClimateModels.build(MC)
 
 mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"mitgcmuv")
 rm(pathof(MC),recursive=true)
 
 ##
 
-tmp=ModelConfig(model=ClimateModels.RandomWalker)
-setup(tmp)
-launch(tmp) 
+tmp=ClimateModels.ModelConfig(model=ClimateModels.RandomWalker)
+ClimateModels.setup(tmp)
+ClimateModels.launch(tmp) 
 
 ##
 
@@ -34,8 +35,8 @@ Downloads.download(
 
 ##
 
-p0=pathof(OceanStateEstimation)
-nb=joinpath(dirname(p0),"../examples/ECCO/ECCO_standard_plots.jl")
+run(`$(git()) clone https://github.com/gaelforget/OceanStateEstimation.jl`)
+nb=joinpath(ENV["HOME"],"OceanStateEstimation.jl/examples/ECCO/ECCO_standard_plots.jl")
 Pluto.activate_notebook_environment(nb)
 Pkg.instantiate()
 include(nb)
