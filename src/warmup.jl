@@ -3,6 +3,7 @@ using Pluto, PlutoUI, PlutoSliderServer, Downloads, IJulia
 import CairoMakie
 
 using ClimateModels, MITgcm, OceanStateEstimation, MeshArrays
+
 ##
 
 p0=pathof(MITgcm)
@@ -22,9 +23,6 @@ launch(tmp)
 
 ##
 
-using ClimateModels.Git
-run(`$(git()) clone https://github.com/gaelforget/OceanStateEstimation.jl`)
-
 MeshArrays.GRID_LLC90_download()
 OceanStateEstimation.ECCOdiags_add("release2")
 OceanStateEstimation.ECCOdiags_add("release4")
@@ -36,8 +34,8 @@ Downloads.download(
 
 ##
 
-using Pkg
-nb="OceanStateEstimation.jl/examples/ECCO/ECCO_standard_plots.jl"
+p0=pathof(OceanStateEstimation)
+nb=joinpath(dirname(p0),"../examples/ECCO/ECCO_standard_plots.jl")
 Pluto.activate_notebook_environment(nb)
 Pkg.instantiate()
 include(nb)
