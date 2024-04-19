@@ -1,4 +1,4 @@
-using Pluto, Downloads, IJulia, Pkg
+using Pluto, CairoMakie, Downloads, IJulia, Pkg
 
 import MITgcm, OceanStateEstimation
 import MITgcm.ClimateModels
