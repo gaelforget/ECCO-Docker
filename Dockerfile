@@ -52,7 +52,6 @@ RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
 
 RUN ${USER_HOME_DIR}/.juliaup/bin/julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN ${USER_HOME_DIR}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/warmup.jl
-RUN ${USER_HOME_DIR}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/download_stuff.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
 
