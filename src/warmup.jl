@@ -13,7 +13,11 @@ MC=MITgcm.MITgcm_config(inputs=MITgcm.read_toml(fil))
 ClimateModels.setup(MC)
 ClimateModels.build(MC)
 
-mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"mitgcmuv")
+cp(joinpath(dirname(p0),"..","examples","configurations","ECCO4.toml"),"src/ECCO4.toml")
+cp(joinpath(dirname(p0),"..","examples","configurations","OCCA2.toml"),"src/OCCA2.toml")
+cp(joinpath(MC,"MITgcm/mysetups/ECCOv4/input/download_files.jl"),"src/download_files.jl")
+
+mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"src/mitgcmuv")
 rm(pathof(MC),recursive=true)
 
 ##
@@ -35,8 +39,9 @@ Downloads.download(
 
 ##
 
-run(`$(git()) clone https://github.com/gaelforget/OceanStateEstimation.jl`)
-nb=joinpath(ENV["HOME"],"OceanStateEstimation.jl/examples/ECCO/ECCO_standard_plots.jl")
+pth=joinpath(ENV["HOME"],"src","OceanStateEstimation.jl")
+run(`$(git()) clone https://github.com/gaelforget/OceanStateEstimation.jl $pth`)
+nb=joinpath(pth,"examples/ECCO/ECCO_standard_plots.jl")
 Pluto.activate_notebook_environment(nb)
 Pkg.instantiate()
 include(nb)
