@@ -1,20 +1,44 @@
-using ClimateModels, MITgcm, OceanStateEstimation
-using Pluto, PlutoUI, PlutoSliderServer, Downloads, IJulia
-#import Plots
-import CairoMakie
+using Pluto, Downloads, IJulia, Pkg
 
-MITgcm_download()
+import MITgcm, OceanStateEstimation
+import MITgcm.ClimateModels
+import MITgcm.MeshArrays
+using MITgcm.ClimateModels.Git
 
-MC=MITgcm_config(configuration="advect_cs")
-setup(MC)
-build(MC,"--allow-skip")
-launch(MC)
+##
 
-tmp=ModelConfig(model=ClimateModels.RandomWalker)
-setup(tmp)
-launch(tmp) 
+p0=pathof(MITgcm)
+fil=joinpath(dirname(p0),"..","examples","configurations","OCCA2.toml")
+MC=MITgcm.MITgcm_config(inputs=MITgcm.read_toml(fil))
+ClimateModels.setup(MC)
+ClimateModels.build(MC)
 
-notebook_url="https://raw.githubusercontent.com/gaelforget/OceanStateEstimation.jl/master/examples/ECCO/ECCO_standard_plots.jl"
-path_to_notebook = Downloads.download(notebook_url)
-#include(path_to_notebook)
+mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"mitgcmuv")
+rm(pathof(MC),recursive=true)
+
+##
+
+tmp=ClimateModels.ModelConfig(model=ClimateModels.RandomWalker)
+ClimateModels.setup(tmp)
+ClimateModels.launch(tmp) 
+
+##
+
+MeshArrays.GRID_LLC90_download()
+OceanStateEstimation.ECCOdiags_add("release2")
+OceanStateEstimation.ECCOdiags_add("release4")
+
+Downloads.download(
+  "https://zenodo.org/record/5784905/files/interp_coeffs_halfdeg.jld2",
+  joinpath(OceanStateEstimation.ScratchSpaces.ECCO,"interp_coeffs_halfdeg.jld2");
+  timeout=60000.0)
+
+##
+
+run(`$(git()) clone https://github.com/gaelforget/OceanStateEstimation.jl`)
+nb=joinpath(ENV["HOME"],"OceanStateEstimation.jl/examples/ECCO/ECCO_standard_plots.jl")
+Pluto.activate_notebook_environment(nb)
+Pkg.instantiate()
+include(nb)
+Pkg.activate()
 
