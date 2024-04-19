@@ -3,12 +3,14 @@ using Pluto, PlutoUI, PlutoSliderServer, Downloads, IJulia
 #import Plots
 import CairoMakie
 
-MITgcm_download()
-
-MC=MITgcm_config(configuration="advect_cs")
+p0=pathof(MITgcm)
+fil=joinpath(dirname(p0),"..","examples","configurations","OCCA2.toml")
+MC=MITgcm_config(inputs=read_toml(fil))
 setup(MC)
-build(MC,"--allow-skip")
-launch(MC)
+build(MC)
+
+mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"mitgcmuv")
+rm(MC,recursive=true)
 
 tmp=ModelConfig(model=ClimateModels.RandomWalker)
 setup(tmp)
