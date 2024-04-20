@@ -39,8 +39,7 @@ RUN cp ${mainpath}/src/setup.py ${mainpath}/setup.py
 RUN cp ${mainpath}/src/runpluto.sh ${mainpath}/runpluto.sh
 RUN cp ${mainpath}/src/Project.toml ${mainpath}/Project.toml
  
-ENV HOM /home/${NB_USER}
-RUN echo 'alias julia="${HOM}/.juliaup/bin/julia --project=${HOM}"' >> ~/.bashrc
+RUN echo 'alias julia="${mainpath}/.juliaup/bin/julia --project=${mainpath}"' >> ~/.bashrc
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
@@ -50,8 +49,8 @@ RUN conda install octave_kernel texinfo r-irkernel
 
 RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
 
-RUN ${HOM}/.juliaup/bin/julia --project=${HOM} -e "import Pkg; Pkg.instantiate();"
-RUN ${HOM}/.juliaup/bin/julia --project=${HOM} ${HOM}/src/warmup.jl
+RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
+RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/warmup.jl
 
 ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
 
