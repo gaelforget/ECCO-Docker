@@ -20,7 +20,8 @@ RUN apt-get install -y --no-install-recommends gfortran && \
     apt-get install -y --no-install-recommends libopenmpi-dev && \
     apt-get install -y --no-install-recommends mpich && \
     apt-get install -y --no-install-recommends libnetcdf-dev && \
-    apt-get install -y --no-install-recommends libnetcdff-dev
+    apt-get install -y --no-install-recommends libnetcdff-dev && \
+    apt-get install -y --no-install-recommends cmake
 
 RUN apt-get install -y --no-install-recommends octave octave-doc && \
     apt-get install -y --no-install-recommends octave-io && \
