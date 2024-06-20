@@ -44,8 +44,7 @@ RUN echo 'alias julia="${mainpath}/.juliaup/bin/julia --project=${mainpath}"' >>
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install numpy xarray
-RUN conda install dask pandas
+RUN conda install numpy xarray pandas
 RUN conda install octave_kernel texinfo r-irkernel
 
 RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
