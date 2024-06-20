@@ -7,6 +7,7 @@ using MITgcm.ClimateModels.Git
 
 ##
 
+if false
 p0=pathof(MITgcm)
 fil=joinpath(dirname(p0),"..","examples","configurations","OCCA2.toml")
 MC=MITgcm.MITgcm_config(inputs=MITgcm.read_toml(fil))
@@ -20,6 +21,7 @@ cp(joinpath(MC,"MITgcm/mysetups/ECCOv4/input/download_files.jl"),"src/download_f
 
 mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"src/mitgcmuv")
 rm(pathof(MC),recursive=true)
+end
 
 ##
 
@@ -31,7 +33,7 @@ ClimateModels.launch(tmp)
 
 MeshArrays.GRID_LLC90_download()
 Climatology.ECCOdiags_add("release2")
-Climatology.ECCOdiags_add("release4")
+#Climatology.ECCOdiags_add("release4")
 
 Downloads.download(
   "https://zenodo.org/record/5784905/files/interp_coeffs_halfdeg.jld2",
