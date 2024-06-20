@@ -18,7 +18,8 @@ cp(joinpath(dirname(p0),"..","examples","configurations","ECCO4.toml"),"src/ECCO
 cp(joinpath(dirname(p0),"..","examples","configurations","OCCA2.toml"),"src/OCCA2.toml")
 cp(joinpath(MC,"MITgcm/mysetups/ECCOv4/input/download_files.jl"),"src/download_files.jl")
 
-mv(joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv"),"src/mitgcmuv")
+f=joinpath(MC,"MITgcm/mysetups/ECCOv4/build/mitgcmuv")
+isfile(f) ? mv(f,"src/mitgcmuv") : println("mitgcmuv not found")
 rm(pathof(MC),recursive=true)
 
 ##
