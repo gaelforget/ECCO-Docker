@@ -3,7 +3,7 @@ using Pluto, CairoMakie, Downloads, IJulia, Pkg
 import MITgcm, Climatology
 import MITgcm.ClimateModels
 import MITgcm.MeshArrays
-using MITgcm.ClimateModels.Git
+git=MITgcm.ClimateModels.git
 
 ##
 
@@ -32,7 +32,8 @@ ClimateModels.launch(tmp)
 ##
 
 MeshArrays.GRID_LLC90_download()
-Climatology.ECCOdiags_add("release2")
+
+#Climatology.ECCOdiags_add("release2")
 #Climatology.ECCOdiags_add("release4")
 
 Downloads.download(
@@ -43,7 +44,7 @@ Downloads.download(
 ##
 
 pth=joinpath(ENV["HOME"],"src","Climatology.jl")
-run(`$(git()) clone https://github.com/gaelforget/Climatology.jl $pth`)
+run(`$(git()) clone https://github.com/JuliaOcean/Climatology.jl $pth`)
 nb=joinpath(pth,"examples/ECCO/ECCO_standard_plots.jl")
 Pluto.activate_notebook_environment(nb)
 Pkg.instantiate()
