@@ -5,8 +5,7 @@ import MITgcm.ClimateModels, MITgcm.MeshArrays
 import MITgcm.ClimateModels.git
 
 ENV["DATADEPS_ALWAYS_ACCEPT"]=true
-ENV["MPI_INC_DIR"]="/usr/lib/x86_64-linux-gnu/openmpi/include"
-ENV["NETCDF_ROOT"]="/usr"
+MITgcm.set_environment_variables_to_default()
 
 ##
 

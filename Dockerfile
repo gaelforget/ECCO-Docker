@@ -2,7 +2,7 @@ FROM jupyter/base-notebook:latest
 
 USER root
 
-ENV mainpath ./
+ENV mainpath /home/jovyan/
 RUN mkdir -p ${mainpath}
 
 RUN apt-get update
@@ -51,9 +51,6 @@ RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
 
 RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
 RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/warmup.jl
-
-ENV MPI_INC_DIR /usr/lib/x86_64-linux-gnu/openmpi/include
-ENV NETCDF_ROOT /usr
 
 RUN jupyter lab build && \
     jupyter lab clean && \
