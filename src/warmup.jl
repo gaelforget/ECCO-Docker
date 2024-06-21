@@ -1,10 +1,13 @@
 using Pluto, CairoMakie, Downloads, IJulia, Pkg
 
 import MITgcm, Climatology
-import MITgcm.ClimateModels
-import MITgcm.MeshArrays
-git=MITgcm.ClimateModels.git
+import MITgcm.ClimateModels, MITgcm.MeshArrays
+import MITgcm.ClimateModels.git
+
 ENV["DATADEPS_ALWAYS_ACCEPT"]=true
+ENV["MPI_INC_DIR"]="/usr/lib/x86_64-linux-gnu/openmpi/include"
+ENV["NETCDF_ROOT"]="/usr"
+
 ##
 
 p0=pathof(MITgcm)
@@ -33,7 +36,7 @@ ClimateModels.launch(tmp)
 MeshArrays.GRID_LLC90_download()
 
 Climatology.ECCOdiags_add("release2")
-Climatology.ECCOdiags_add("release4")
+#Climatology.ECCOdiags_add("release4")
 
 Downloads.download(
   "https://zenodo.org/record/5784905/files/interp_coeffs_halfdeg.jld2",
