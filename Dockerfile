@@ -45,11 +45,10 @@ RUN echo 'alias julia="${mainpath}/.juliaup/bin/julia --project=${mainpath}"' >>
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
 RUN conda install numpy xarray pandas
-RUN conda install octave_kernel texinfo r-irkernel
 
 RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
 
-RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} -e "import Pkg; Pkg.instantiate();"
+RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} -e "import Pkg; Pkg.update(); Pkg.instantiate();"
 RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/warmup.jl
 
 RUN jupyter lab build && \
