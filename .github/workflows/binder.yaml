@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - Climatology_plus_cmake_bis
+      - reduce_size
 jobs:
   binder:
     runs-on: ubuntu-latest
