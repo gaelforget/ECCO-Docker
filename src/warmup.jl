@@ -1,11 +1,20 @@
-using Pluto, CairoMakie, Downloads, IJulia, Pkg
 
+using Pluto, CairoMakie, Downloads, IJulia, Pkg
 import MITgcm, Climatology
-import MITgcm.ClimateModels, MITgcm.MeshArrays
-import MITgcm.ClimateModels.git
 
 ENV["DATADEPS_ALWAYS_ACCEPT"]=true
 MITgcm.set_environment_variables_to_default()
+
+## need to download and patch MITgcm 
+# https://github.com/MITgcm/MITgcm/pull/849
+include("patch_MITgcm.jl")
+
+##
+
+if false
+
+import MITgcm.ClimateModels, MITgcm.MeshArrays
+import MITgcm.ClimateModels.git
 
 ##
 
@@ -52,3 +61,4 @@ Pkg.instantiate()
 include(nb)
 Pkg.activate()
 
+end #if false
