@@ -44,7 +44,6 @@ RUN echo 'alias julia="${mainpath}/.juliaup/bin/julia --project=${mainpath}"' >>
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install numpy xarray pandas
 
 RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
 
@@ -55,4 +54,6 @@ RUN jupyter lab build && \
     jupyter lab clean && \
     pip install ${mainpath} --no-cache-dir && \
     rm -rf ~/.cache
+
+RUN conda install numpy xarray pandas
 
