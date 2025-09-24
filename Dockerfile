@@ -2,7 +2,7 @@ FROM jupyter/base-notebook:latest
 
 USER root
 
-ENV mainpath /home/jovyan/
+ENV mainpath=/home/jovyan/
 RUN mkdir -p ${mainpath}
 
 RUN apt-get update

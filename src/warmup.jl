@@ -1,13 +1,13 @@
 
-using Pluto, CairoMakie, Downloads, IJulia, Pkg
+import CairoMakie, Downloads, IJulia, Pkg
 import MITgcm, Climatology
 
-ENV["DATADEPS_ALWAYS_ACCEPT"]=true
-MITgcm.set_environment_variables_to_default()
+#ENV["DATADEPS_ALWAYS_ACCEPT"]=true
+#MITgcm.set_environment_variables_to_default()
 
 ## need to download and patch MITgcm 
 # https://github.com/MITgcm/MITgcm/pull/849
-include("patch_MITgcm.jl")
+#include("patch_MITgcm.jl")
 
 ##
 
