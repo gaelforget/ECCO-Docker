@@ -2,7 +2,7 @@ FROM jupyter/base-notebook:latest
 
 USER root
 
-ENV mainpath /home/jovyan/
+ENV mainpath=/home/jovyan/
 RUN mkdir -p ${mainpath}
 
 RUN apt-get update
@@ -23,12 +23,6 @@ RUN apt-get install -y --no-install-recommends gfortran && \
     apt-get install -y --no-install-recommends libnetcdff-dev && \
     apt-get install -y --no-install-recommends cmake
 
-RUN apt-get install -y --no-install-recommends octave octave-doc && \
-    apt-get install -y --no-install-recommends octave-io && \
-    apt-get install -y --no-install-recommends octave-optim && \
-    apt-get install -y --no-install-recommends octave-statistics && \
-    apt-get install -y --no-install-recommends liboctave-dev
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_USER}
@@ -44,10 +38,10 @@ RUN echo 'alias julia="${mainpath}/.juliaup/bin/julia --project=${mainpath}"' >>
 
 RUN conda config --env --add channels conda-forge
 RUN conda config --env --add channels r
-RUN conda install numpy xarray pandas
 
 RUN curl -fsSL https://install.julialang.org | sh -s -- --yes
 
+RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} -e 'import Pkg; Pkg.add("MITgcm");'
 RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} -e "import Pkg; Pkg.update(); Pkg.instantiate();"
 RUN ${mainpath}/.juliaup/bin/julia --project=${mainpath} ${mainpath}/src/warmup.jl
 
@@ -55,4 +49,6 @@ RUN jupyter lab build && \
     jupyter lab clean && \
     pip install ${mainpath} --no-cache-dir && \
     rm -rf ~/.cache
+
+RUN conda install numpy xarray pandas
 
