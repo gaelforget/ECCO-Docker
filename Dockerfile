@@ -23,12 +23,6 @@ RUN apt-get install -y --no-install-recommends gfortran && \
     apt-get install -y --no-install-recommends libnetcdff-dev && \
     apt-get install -y --no-install-recommends cmake
 
-RUN apt-get install -y --no-install-recommends octave octave-doc && \
-    apt-get install -y --no-install-recommends octave-io && \
-    apt-get install -y --no-install-recommends octave-optim && \
-    apt-get install -y --no-install-recommends octave-statistics && \
-    apt-get install -y --no-install-recommends liboctave-dev
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_USER}
@@ -57,5 +51,4 @@ RUN jupyter lab build && \
     rm -rf ~/.cache
 
 RUN conda install numpy xarray pandas
-RUN conda install octave_kernel texinfo r-irkernel
 
